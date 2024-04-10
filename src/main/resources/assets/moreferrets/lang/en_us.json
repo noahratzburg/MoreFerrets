@@ -1,0 +1,7 @@
+{
+  "sounds.moreferrets.ferret_idle_one": "Ferret Chittering",
+  "sounds.moreferrets.ferret_idle_two": "Ferret Honks",
+  "sounds.moreferrets.ferret_hit": "Ferret Squeaks",
+  "sounds.moreferrets.ferret_death": "Ferret Dies",
+  "item.moreferrets.ferret_spawn_egg" : "Ferret Spawn Egg"
+}

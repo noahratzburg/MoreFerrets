@@ -1,0 +1,26 @@
+{
+  "ferret_idle_one": {
+    "subtitle": "sounds.moreferrets.ferret_idle_one",
+    "sounds": [
+      "moreferrets:ferret_idle_one"
+    ]
+  },
+  "ferret_idle_two": {
+    "subtitle": "sounds.moreferrets.ferret_idle_two",
+    "sounds": [
+      "moreferrets:ferret_idle_two"
+    ]
+  },
+  "ferret_hit": {
+    "subtitle": "sounds.moreferrets.ferret_hit",
+    "sounds": [
+      "moreferrets:ferret_hit"
+    ]
+  },
+  "ferret_death": {
+    "subtitle": "sounds.moreferrets.ferret_death",
+    "sounds": [
+      "moreferrets:ferret_death"
+    ]
+  }
+}
