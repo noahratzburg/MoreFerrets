@@ -16,6 +16,9 @@ public class ModItems {
     public static final RegistryObject<Item> FERRET_SPAWN_EGG = ITEMS.register("ferret_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.FERRET_STANDARD, 0x964B00, 0x000000, new Item.Properties()));
 
+    public static final RegistryObject<Item> FERRET_PANDA_SPAWN_EGG = ITEMS.register("ferret_panda_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.FERRET_PANDA, 0xFFFFFF, 0xD2C9C3, new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

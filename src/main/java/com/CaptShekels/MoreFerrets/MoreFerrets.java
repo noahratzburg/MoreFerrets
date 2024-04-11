@@ -61,6 +61,7 @@ public class MoreFerrets
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if ( event.getTabKey() == CreativeModeTabs.SPAWN_EGGS ) {
             event.accept(ModItems.FERRET_SPAWN_EGG);
+            event.accept(ModItems.FERRET_PANDA_SPAWN_EGG);
         }
     }
 
