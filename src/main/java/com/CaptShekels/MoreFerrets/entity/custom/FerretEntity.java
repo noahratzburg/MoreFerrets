@@ -1,19 +1,14 @@
 package com.CaptShekels.MoreFerrets.entity.custom;
 
-import com.CaptShekels.MoreFerrets.entity.ModEntities;
 import com.CaptShekels.MoreFerrets.sounds.ModSounds;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Rabbit;
@@ -22,7 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -30,8 +24,14 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class FerretEntity extends Animal implements GeoEntity {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public abstract class FerretEntity extends Animal implements GeoEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private static final TargetingConditions PARTNER_TARGETING = TargetingConditions.forNonCombat().range(8.0D).ignoreLineOfSight();
+    private static final List<Class<? extends Animal>> TARGET_BREEDING_CLASSES = Arrays.asList(FerretStandardEntity.class, FerretPandaEntity.class);
 
     // Declare cached animations
     private static final RawAnimation WALK_ANIM = RawAnimation.begin().then("animation.ferret.walk", Animation.LoopType.LOOP);
@@ -40,12 +40,12 @@ public class FerretEntity extends Animal implements GeoEntity {
     private static final RawAnimation BEG_ANIM = RawAnimation.begin().then("animation.ferret.idle.beg", Animation.LoopType.PLAY_ONCE);
 
     private int salt;
+    private FerretType TYPE;
     private TemptGoal temptGoal;
     private AnimationController<?> triggerableController;
-    private FerretType TYPE = FerretType.STANDARD;
     public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.CHICKEN, Items.COD, Items.SALMON);
 
-    public FerretEntity(EntityType<? extends Animal> entityType, Level level) {
+    public FerretEntity(EntityType<? extends FerretEntity> entityType, Level level) {
         super(entityType, level);
         this.salt = 50 + (int)(Math.random() * 50);
     }
@@ -99,7 +99,7 @@ public class FerretEntity extends Animal implements GeoEntity {
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
         // Mob Breeding Goals
-        this.goalSelector.addGoal(1, new BreedGoal(this, 1.15D));
+        this.goalSelector.addGoal(1, new FerretBreedGoal(this, 1.15D, TARGET_BREEDING_CLASSES));
         this.goalSelector.addGoal(2, new PanicGoal(this, 1.1D));
         this.goalSelector.addGoal(3, this.temptGoal);
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
@@ -143,26 +143,55 @@ public class FerretEntity extends Animal implements GeoEntity {
         }
     }
 
-    @Nullable
-    @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mob) {
-        return ModEntities.FERRET_STANDARD.get().create(level);
-    }
-
-    public static boolean canFerretSpawn(EntityType<FerretEntity> entity, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos position, RandomSource random) {
-        return Animal.checkAnimalSpawnRules(entity, level, spawnType, position, random);
-    }
-
     @Override
     public boolean isFood(ItemStack pStack) {
         return FOOD_ITEMS.test(pStack);
     }
-
     public void setFerretType(FerretType type) { this.TYPE = type; }
     public FerretType getFerretType() { return this.TYPE; }
 
     public enum FerretType {
         STANDARD,
         PANDA;
+    }
+
+    public static class FerretBreedGoal extends BreedGoal {
+        List<Class<? extends Animal>> targetClassList;
+        public FerretBreedGoal(Animal p_25122_, double p_25123_) {
+            super(p_25122_, p_25123_);
+        }
+        public FerretBreedGoal(Animal p_25122_, double p_25123_, List<Class<? extends Animal>> targetClassList) {
+            super(p_25122_, p_25123_);
+            this.targetClassList = targetClassList;
+        }
+
+        public boolean canUse() {
+            if (!this.animal.isInLove()) {
+                return false;
+            } else {
+                this.partner = this.getFreePartner();
+                return this.partner != null;
+            }
+        }
+
+        @Nullable
+        private Animal getFreePartner() {
+            List<Animal> list = new ArrayList<>();
+            for(Class<? extends Animal> animalClass : targetClassList) {
+                list.addAll(this.level.getNearbyEntities(animalClass, PARTNER_TARGETING, this.animal, this.animal.getBoundingBox().inflate(8.0D)));
+            }
+            double d0 = Double.MAX_VALUE;
+            Animal animal = null;
+
+            for(Animal animal1 : list) {
+                if ((this.animal.canMate(animal1) || TARGET_BREEDING_CLASSES.contains(animal1.getClass())) && this.animal.distanceToSqr(animal1) < d0) {
+                    animal = animal1;
+                    d0 = this.animal.distanceToSqr(animal1);
+                }
+            }
+
+            return animal;
+        }
+
     }
 }

@@ -4,6 +4,7 @@ import com.CaptShekels.MoreFerrets.MoreFerrets;
 import com.CaptShekels.MoreFerrets.entity.ModEntities;
 import com.CaptShekels.MoreFerrets.entity.custom.FerretEntity;
 import com.CaptShekels.MoreFerrets.entity.custom.FerretPandaEntity;
+import com.CaptShekels.MoreFerrets.entity.custom.FerretStandardEntity;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 public class ModEvents {
     @SubscribeEvent
     public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
-        event.register(ModEntities.FERRET_STANDARD.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, FerretEntity::canFerretSpawn, SpawnPlacementRegisterEvent.Operation.OR);
+        event.register(ModEntities.FERRET_STANDARD.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, FerretStandardEntity::canFerretStandardSpawn, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(ModEntities.FERRET_PANDA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, FerretPandaEntity::canFerretPandaSpawn, SpawnPlacementRegisterEvent.Operation.OR);
     }
 

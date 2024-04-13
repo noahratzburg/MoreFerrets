@@ -12,19 +12,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
 
-public class FerretPandaEntity extends FerretEntity {
-    public FerretPandaEntity(EntityType<? extends FerretEntity> entityType, Level level) {
+public class FerretStandardEntity extends FerretEntity {
+    public FerretStandardEntity(EntityType<? extends FerretEntity> entityType, Level level) {
         super(entityType, level);
-        this.setFerretType(FerretType.PANDA);
+        this.setFerretType(FerretType.STANDARD);
     }
 
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mob) {
-        return ModEntities.FERRET_PANDA.get().create(level);
+        return ModEntities.FERRET_STANDARD.get().create(level);
     }
 
-    public static boolean canFerretPandaSpawn(EntityType<FerretPandaEntity> entity, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos position, RandomSource random) {
+    public static boolean canFerretStandardSpawn(EntityType<FerretStandardEntity> entity, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos position, RandomSource random) {
         return Animal.checkAnimalSpawnRules(entity, level, spawnType, position, random);
     }
 }
