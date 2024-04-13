@@ -1,5 +1,6 @@
 package com.CaptShekels.MoreFerrets.entity.custom;
 
+import com.CaptShekels.MoreFerrets.MoreFerrets;
 import com.CaptShekels.MoreFerrets.sounds.ModSounds;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;

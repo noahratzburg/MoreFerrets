@@ -40,32 +40,24 @@ public class MoreFerrets
         ModSounds.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
-
-        MinecraftForge.EVENT_BUS.register(this);
-
         modEventBus.addListener(this::addCreative);
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
-        LOGGER.info("HELLO FROM COMMON SETUP");
-    }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
         LOGGER.info("HELLO from server starting");
     }
-
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if ( event.getTabKey() == CreativeModeTabs.SPAWN_EGGS ) {
-            event.accept(ModItems.FERRET_SPAWN_EGG);
-            event.accept(ModItems.FERRET_PANDA_SPAWN_EGG);
-        }
+    private void commonSetup(final FMLCommonSetupEvent event)
+    {
+        LOGGER.info("HELLO FROM COMMON SETUP");
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        ModItems.registerCreativeTab(event);
+    }
+
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
