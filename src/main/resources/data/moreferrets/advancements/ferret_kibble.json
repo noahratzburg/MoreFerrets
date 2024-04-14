@@ -1,0 +1,49 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "moreferrets:ferret_kibble_two",
+      "moreferrets:ferret_kibble_three"
+    ]
+  },
+  "criteria": {
+    "has_crafting_requirements": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:wheat",
+              "minecraft:egg",
+              "minecraft:chicken",
+              "minecraft:beef",
+              "minecraft:mutton",
+              "minecraft:porkchop",
+              "minecraft:cod",
+              "minecraft:salmon"
+            ]
+          }
+        ]
+      }
+    },
+    "has_kibble_two": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "moreferrets:ferret_kibble_two"
+      }
+    },
+    "has_kibble_three": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "moreferrets:ferret_kibble_three"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crafting_requirements",
+      "has_kibble_two",
+      "has_kibble_three"
+    ]
+  ]
+}

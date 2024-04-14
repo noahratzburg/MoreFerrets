@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "moreferrets:leather"
+    ]
+  },
+  "criteria": {
+    "has_ferret_hide": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moreferrets:ferret_hide"
+            ]
+          }
+        ]
+      }
+    },
+    "has_ferret_leather_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "moreferrets:leather"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ferret_hide",
+      "has_ferret_leather_recipe"
+    ]
+  ]
+}
