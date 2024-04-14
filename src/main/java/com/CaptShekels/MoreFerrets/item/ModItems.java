@@ -25,6 +25,10 @@ public class ModItems {
     public static final RegistryObject<Item> FERRET_HIDE = ITEMS.register("ferret_hide",
             () -> new Item(new Item.Properties()));
 
+    /* FERRET BREED ITEMS CUSTOM */
+    public static final RegistryObject<Item> FERRET_KIBBLE = ITEMS.register("ferret_kibble",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
@@ -35,8 +39,12 @@ public class ModItems {
             event.accept(ModItems.FERRET_PANDA_SPAWN_EGG);
         }
 
-        if( event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+        if( event.getTabKey() == CreativeModeTabs.INGREDIENTS ) {
             event.accept(ModItems.FERRET_HIDE);
+        }
+
+        if( event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS ) {
+            event.accept(ModItems.FERRET_KIBBLE);
         }
     }
 }

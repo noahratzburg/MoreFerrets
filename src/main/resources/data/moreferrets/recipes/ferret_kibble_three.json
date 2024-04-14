@@ -1,0 +1,50 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "#X",
+    " A"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:chicken",
+        "data": 0
+      },
+      {
+        "item": "minecraft:beef",
+        "data": 1
+      },
+      {
+        "item": "minecraft:porkchop",
+        "data": 2
+      },
+      {
+        "item": "minecraft:mutton",
+        "data": 3
+      },
+      {
+        "item": "minecraft:salmon",
+        "data": 4
+      },
+      {
+        "item": "minecraft:cod",
+        "data": 5
+      }
+    ],
+    "X": {
+      "item": "minecraft:wheat",
+      "data": 6
+    },
+    "A": {
+      "item": "minecraft:egg",
+      "data": 7
+    }
+  },
+  "result":
+  {
+    "item": "moreferrets:ferret_kibble",
+    "count": 3,
+    "data": 8
+  }
+}

@@ -1,6 +1,6 @@
 package com.CaptShekels.MoreFerrets.entity.custom;
 
-import com.CaptShekels.MoreFerrets.MoreFerrets;
+import com.CaptShekels.MoreFerrets.item.ModItems;
 import com.CaptShekels.MoreFerrets.sounds.ModSounds;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -44,7 +44,7 @@ public abstract class FerretEntity extends Animal implements GeoEntity {
     private FerretType TYPE;
     private TemptGoal temptGoal;
     private AnimationController<?> triggerableController;
-    public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.CHICKEN, Items.COD, Items.SALMON);
+    public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.CHICKEN, Items.COD, Items.SALMON, ModItems.FERRET_KIBBLE.get());
 
     public FerretEntity(EntityType<? extends FerretEntity> entityType, Level level) {
         super(entityType, level);
@@ -89,7 +89,7 @@ public abstract class FerretEntity extends Animal implements GeoEntity {
                 .add(Attributes.ATTACK_DAMAGE, 3f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.ATTACK_KNOCKBACK, 0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.4f).build();
+                .add(Attributes.MOVEMENT_SPEED, 0.35f).build();
     }
 
     @Override
@@ -193,6 +193,5 @@ public abstract class FerretEntity extends Animal implements GeoEntity {
 
             return animal;
         }
-
     }
 }
