@@ -3,7 +3,7 @@
   "biomes" : "#moreferrets:ferret_spawnable_biomes",
   "spawners" : {
     "type" : "moreferrets:ferret",
-    "weight" : 12,
+    "weight" : 8,
     "minCount" : 2,
     "maxCount" : 3
   }

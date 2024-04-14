@@ -3,7 +3,7 @@
   "biomes" : "#moreferrets:ferret_panda_spawnable_biomes",
   "spawners" : {
     "type" : "moreferrets:ferret_panda",
-    "weight" : 12,
+    "weight" : 8,
     "minCount" : 2,
     "maxCount" : 3
   }
