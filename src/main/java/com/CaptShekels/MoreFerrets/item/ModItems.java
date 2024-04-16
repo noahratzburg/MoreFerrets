@@ -5,7 +5,7 @@ import com.CaptShekels.MoreFerrets.entity.ModEntities;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -33,17 +33,17 @@ public class ModItems {
         ITEMS.register(eventBus);
     }
 
-    public static void registerCreativeTab(BuildCreativeModeTabContentsEvent event) {
-        if ( event.getTabKey() == CreativeModeTabs.SPAWN_EGGS ) {
+    public static void registerCreativeTab(CreativeModeTabEvent.BuildContents event) {
+        if ( event.getTab() == CreativeModeTabs.SPAWN_EGGS ) {
             event.accept(ModItems.FERRET_SPAWN_EGG);
             event.accept(ModItems.FERRET_PANDA_SPAWN_EGG);
         }
 
-        if( event.getTabKey() == CreativeModeTabs.INGREDIENTS ) {
+        if( event.getTab() == CreativeModeTabs.INGREDIENTS ) {
             event.accept(ModItems.FERRET_HIDE);
         }
 
-        if( event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS ) {
+        if( event.getTab() == CreativeModeTabs.FOOD_AND_DRINKS ) {
             event.accept(ModItems.FERRET_KIBBLE);
         }
     }

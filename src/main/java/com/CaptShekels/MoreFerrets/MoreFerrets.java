@@ -6,10 +6,9 @@ import com.CaptShekels.MoreFerrets.item.ModItems;
 import com.CaptShekels.MoreFerrets.sounds.ModSounds;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -54,7 +53,7 @@ public class MoreFerrets
         LOGGER.info("HELLO FROM COMMON SETUP");
     }
 
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+    private void addCreative(CreativeModeTabEvent.BuildContents event) {
         ModItems.registerCreativeTab(event);
     }
 
